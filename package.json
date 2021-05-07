@@ -1,0 +1,25 @@
+{
+  "name": "dott",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piramidebouwer/test_backend_dott.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piramidebouwer/test_backend_dott/issues"
+  },
+  "homepage": "https://github.com/piramidebouwer/test_backend_dott#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.2",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.6"
+  }
+}
