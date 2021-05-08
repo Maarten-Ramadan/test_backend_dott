@@ -7,11 +7,6 @@ export class SolverRecursive extends ASolver
 
 	private solver(testCase: TestCase, x: number, y: number): void {
 		// Return if coördinates are out of bounce
-		// console.log('x: ' + x);
-		// console.log('cols: ' + testCase.columns);
-		// console.log('y: ' + y);
-		// console.log('rows: ' + testCase.rows);
-
 		if (x >= testCase.columns || y >= testCase.rows)
 			return ;
 
@@ -30,7 +25,6 @@ export class SolverRecursive extends ASolver
 				}
 			}
 		}
-		// console.log(testCase.resultMap);
 
 		// Go to next x & y position recursively
 		this.solver(testCase, x + 1, y);
@@ -40,10 +34,8 @@ export class SolverRecursive extends ASolver
 	solveIt(testCase: TestCase, x: number, y: number): void {
 		this.changed = true;
 		while (this.changed) { 
-			// console.log(testCase.resultMap);
 			this.changed = false;
 			this.solver(testCase, 0, 0)
-			// console.log('here');
 		}
 	}
 }

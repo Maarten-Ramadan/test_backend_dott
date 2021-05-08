@@ -1,4 +1,4 @@
-export class ArgParser
+export class ArgParser // TODO wat hiermee doen?
 {
 	isRecursive: boolean;
 	isIterative: boolean;

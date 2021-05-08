@@ -7,8 +7,9 @@ import { SolverRecursive } from './SolverRecursive';
 import { SolverIterative } from './SolverIterative';
 import { Flags } from './Reader';
 import { Printer } from './Printer';
+import { exit } from 'process';
 
-async function MainProcess(args?: string[]): Promise<void> {
+async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown all trycatches
 	var argParser = new ArgParser();
 	var reader = new Reader();
 	var parser = new Parser();
@@ -25,16 +26,25 @@ async function MainProcess(args?: string[]): Promise<void> {
 	if (argParser.isOutput)  // TODO fixen
 		flags |= Flags.OUTPUT;
 
-	var bitmap: string = await reader.read(flags, argParser.inputFilePath);
-
-	var testCases: TestCase[] = parser.parseInput(bitmap);
+		
+	try {
+		var input: string = await reader.read(argParser.inputFilePath);
+		var testCases: TestCase[] = parser.parseInput(input);
+	}
+	catch (error) {
+		if (error.code == 'ENOENT')
+			console.error(`Error! Failed to open file: "${argParser.inputFilePath}"`);
+		else
+			console.error(error);
+		exit(1); // gracefully exit function?
+	}
 
 	if (argParser.isRecursive)
 		solver = new SolverRecursive() // TODO try/catch?
 	else
 		solver = new SolverIterative() // TODO try/catch?
 
-	testCases = solver.solve(testCases); // TODO try/catch?
+	testCases = solver.solve(testCases!); // TODO try/catch?
 	
 	printer.print(testCases);
 }
