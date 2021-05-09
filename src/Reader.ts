@@ -1,10 +1,8 @@
 var fs = require("fs");
 
 export enum Flags {
-	RECURSIVE = 1, 	// 0b0001
-	ITERATIVE = 2, 	// 0b0010
-	OUTPUT = 4, 	// 0b0100
-	INPUT = 8		// 0b1000
+	OUTPUT = 1, 	// 0b0001
+	INPUT = 2		// 0b0010
 };
 
 function delay(ms: number) { // TODO iffie?

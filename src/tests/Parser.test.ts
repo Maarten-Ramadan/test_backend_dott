@@ -1,15 +1,13 @@
 import { Parser } from '../Parser'
 
-var justBitmap = '0001\n0011\n0110';
-
 // First Line
 var noFirstLine = '3 4\n0001\n0011\n0110';
 var firstLineZero = '0';
 var firstLineTooHigh = '3\n3 4\n0001\n0011\n0110';
-var firstLineTooLow = '1\n1 3\n000\n\n2 4\n1001\n0001';
+var firstLineTooLow = '1\n1 3\n010\n\n2 4\n1001\n0001';
 var firstLineTooLow2 = '0\n3 4\n0001\n0011\n0110';
-var firstLineSpace = ' 1\n3 4\n0001\n0011\n0110';
-var firstLineSpace2 = '1 \n3 4\n0001\n0011\n0110';
+var firstLineSpace = '  1  \n3 4\n0001\n0011\n0110';
+var firstLineSpace2 = '1  \n3 4\n0001\n0011\n0110';
 var firstLineIllegalChar = '.1 \n3 4\n0001\n0011\n0110';
 var firstLineIllegalChar2 = '1f \n3 4\n0001\n0011\n0110';
 var firstLineTooManyTestCases = '1001\n3 4\n0001\n0011\n0110';
@@ -20,7 +18,7 @@ var firstLineNewlineBefore = '\n1\n3 4\n0001\n0011\n0110';
 var sizeLineIllegalChar = '1\nf 4\n0001\n0011\n0110';
 var sizeLineIllegalChar2 = '1\n3 +\n0001\n0011\n0110';
 var sizeLineIllegalChar3 = '1\n3 \n0001\n0011\n0110';
-var sizeLineIllegalChar4 = '1\n 3 4\n0001\n0011\n0110';
+var sizeLineSpaces = '1\n 3   4  \n0001\n0011\n0110';
 var sizeLineIllegalChar5 = '1\n3-4\n0001\n0011\n0110';
 var noSizeLine = '1\n0001\n0011\n0110';
 var sizeLineRowTooHigh = '1\n5 4\n0001\n0011\n0110';
@@ -35,23 +33,21 @@ var bitmapNoWhitePixel = '1\n3 4\n0000\n0000\n0000';
 var bitmapIllegalChar = '1\n3 4\n0001\n0-11\n0110';
 var bitmapIllegalChar2 = '1\n3 4\n0301\n0011\n0110';
 var bitmapRowTooLong = '1\n3 4\n0001\n00111\n0110';
-var bitmapExtraColumn = '1\n3 4\n0001\n00111\n0110\n100';
-var bitmapIllegalNewline = '1\n3 4\n0001\n00111\n\n0110\n100';
+var bitmapExtraColumn = '1\n3 4\n0001\n0011\n0110\n100';
+var bitmapIllegalNewline = '1\n3 4\n0001\n0011\n\n0110';
 
 // Global
 var globalNoInput = '';
-var globalNoNewline = '2\n3 4\n0001\n00111\n\n0110\n100\n4 5\n00011\n00111\n01100\n01010';
-var globalIllegalNewline = '2\n3 4\n0001\n00111\n\n0110\n100\n\n\n4 5\n00011\n00111\n01100\n01010';
-var globalRandomChars = '2\n3 4\n0001\n00111\n\n0110\n100\np\n4 5\n00011\n00111\n01100\n01010';
-var globalRandomChars2 = '2\n3 4\n0001\n00111\n\n0110\n100\np\nf-\n4 5\n00011\n00111\n01100\n01010';
-var globalTrailingNewlines = '2\n3 4\n0001\n00111\n\n0110\n100\n\n4 5\n00011\n00111\n01100\n01010\n\n';
-
+var globalNoNewline = '2\n3 4\n0001\n0011\n\n0110\n100\n4 5\n00011\n00111\n01100\n01010';
+var globalRandomChars = '2\n3 4\n0001\n0011\n\n0110\n100\np\n4 5\n00011\n00111\n01100\n01010';
+var globalRandomChars2 = '2\n3 4\n0001\n0011\n\n0110\n100\np\nf-\n4 5\n00011\n00111\n01100\n01010';
+var globalNewlines = '\n2\n3 4\n0001\n0011\n\n\n0110\n\n\n4 5\n00011\n00111\n01100\n\n01010\n\n';
+var globalSpaces = '  2  \n3 4\n0001\n0011\n0110\n\n4 5  \n  00011\n  00111\n  01100   \n01010    ';
+var GlobalBitmapOnly = '0001\n0011\n0110';
+var GlobalMultipleWS = "\n\n\n4\n\n\n3 4\n\n0001\n0011  \n0110\n\n4 5\n00010\n   00110\n01100  \n01100\n\n\n     \n\n10 10\n0000000000\n0000000000\n0000000000\n 0000000000\n0000000000\n  0000000000  \n0000000000\n0000000000\n0000000000\n0000000001\n\n4 5\n00010\n  00110 \n01100\n01100  "
 
 describe("Parser", () => {
 	var parser: Parser = new Parser();
-
-	// const consoleLog = console.log;
-	// console.log = jest.fn();
 
 	describe("Global", () => {
 		test('No input', () => {
@@ -62,12 +58,17 @@ describe("Parser", () => {
 		test('Missing newline between two test cases', () => {
 			expect(() => {
 				parser.parseInput(globalNoNewline);
-			}).toThrowError("Invalid input: missing newline or the number of rows doens't match input");
+			}).toThrowError("Invalid input: invalid size format");
 		});
-		test('Illegal newlines', () => {
+		test('Mixed in newlines', () => {
 			expect(() => {
-				parser.parseInput(globalIllegalNewline);
-			}).toThrowError("Invalid input: Illegal newlines or the number of test cases doesn't match input");
+				parser.parseInput(globalNewlines);
+			}).not.toThrowError();
+		});
+		test('Mixed in spaces', () => {
+			expect(() => {
+				parser.parseInput(globalSpaces);
+			}).not.toThrowError();
 		});
 		test('Random characters', () => {
 			expect(() => {
@@ -79,10 +80,15 @@ describe("Parser", () => {
 				parser.parseInput(globalRandomChars2);
 			}).toThrowError("Invalid input: Illegal characters in input: \"p,f,-\"");
 		});
-		test('Illegal trailing newlines', () => {
+		test('Only a bitmap', () => {
 			expect(() => {
-				parser.parseInput(globalTrailingNewlines);
-			}).toThrowError("Invalid input: Illegal newlines or the number of test cases doesn't match input");
+				parser.parseInput(GlobalBitmapOnly);
+			}).toThrowError("Invalid input: invalid size format");
+		});
+		test('Input with multiple whitespaces', () => {
+			expect(() => {
+				parser.parseInput(GlobalMultipleWS);
+			}).not.toThrowError();
 		});
 	});
 
@@ -97,25 +103,25 @@ describe("Parser", () => {
 				parser.parseInput(bitmapIllegalChar);
 			}).toThrowError("Invalid input: Illegal characters in input: \"-\"");
 		});
-		test('Illegal character in bitmap', () => {
+		test('Another llegal character in bitmap', () => {
 			expect(() => {
 				parser.parseInput(bitmapIllegalChar2);
-			}).toThrowError("Invalid bitmap: Illegal character in row: 0301");
+			}).toThrowError("Bitmap number 1 is invalid");
 		});
 		test('One row too long', () => {
 			expect(() => {
 				parser.parseInput(bitmapRowTooLong);
-			}).toThrowError("Invalid bitmap: number of columns doens't match input");
+			}).toThrowError("Bitmap number 1 is invalid");
 		});
 		test('One extra row with invalid columns', () => {
 			expect(() => {
 				parser.parseInput(bitmapExtraColumn);
-			}).toThrowError("Invalid input: missing newline or the number of rows doens't match input");
+			}).toThrowError("Invalid input: illegal row after bitmap 1");
 		});
 		test('Newline in map', () => {
 			expect(() => {
 				parser.parseInput(bitmapIllegalNewline);
-			}).toThrowError("Invalid input: Illegal newlines or the number of test cases doesn't match input");
+			}).not.toThrowError("Bitmap number 1 is invalid");
 		});
 	});
 
@@ -140,10 +146,10 @@ describe("Parser", () => {
 				parser.parseInput(sizeLineIllegalChar3);
 			}).toThrowError("Invalid input: invalid size format");
 		});
-		test('Illegal character after sizes', () => {
+		test('Spaces in size line', () => {
 			expect(() => {
-				parser.parseInput(sizeLineIllegalChar4);
-			}).toThrowError("Invalid input: invalid size format");
+				parser.parseInput(sizeLineSpaces);
+			}).not.toThrow();
 		});
 		test('Illegal character in between sizes', () => {
 			expect(() => {
@@ -158,22 +164,22 @@ describe("Parser", () => {
 		test('Row size too high', () => {
 			expect(() => {
 				parser.parseInput(sizeLineRowTooHigh);
-			}).toThrowError("Invalid input: missing newline or the number of rows doens't match input");
+			}).toThrowError("Invalid input: number of rows doesn't match input");
 		});
 		test('Row size too low', () => {
 			expect(() => {
 				parser.parseInput(sizeLineRowTooLow);
-			}).toThrowError("Invalid input: missing newline or the number of rows doens't match input");
+			}).toThrowError("Invalid input: illegal row after bitmap 1");
 		});
 		test('Column size too high', () => {
 			expect(() => {
 				parser.parseInput(sizeLineColumnTooHigh);
-			}).toThrowError("Invalid bitmap: number of columns doens't match input");
+			}).toThrowError("Bitmap number 1 is invalid");
 		});
 		test('Column size too low', () => {
 			expect(() => {
 				parser.parseInput(sizeLineColumnTooLow);
-			}).toThrowError("Invalid bitmap: number of columns doens't match input");
+			}).toThrowError("Bitmap number 1 is invalid");
 		});
 		test('No space between row and column size', () => {
 			expect(() => {
@@ -196,7 +202,7 @@ describe("Parser", () => {
 		test("Number doesn't match number of test cases (too low)", () => {
 			expect(() => {
 				parser.parseInput(firstLineTooLow);
-			}).toThrowError("Invalid input: Illegal newlines or the number of test cases doesn't match input");
+			}).toThrowError("Invalid input: illegal row after bitmap 1");
 		});
 		test("Number doesn't match number of test cases (zero)", () => {
 			expect(() => {
@@ -208,15 +214,15 @@ describe("Parser", () => {
 				parser.parseInput(firstLineZero);
 			}).toThrowError("Invalid input: First line should be a number between 1 and 1000");
 		});
-		test('Space in first line (before valid number)', () => {
+		test('Spaces in first line', () => {
 			expect(() => {
 				parser.parseInput(firstLineSpace);
-			}).toThrowError("Invalid input: First line should be a number between 1 and 1000");
+			}).not.toThrowError();
 		});
 		test('Space in first line (after valid number)', () => {
 			expect(() => {
 				parser.parseInput(firstLineSpace2);
-			}).toThrowError("Invalid input: First line should be a number between 1 and 1000");
+			}).not.toThrowError();
 		});
 		test('Illegal character in first line (before valid number)', () => {
 			expect(() => {
@@ -241,16 +247,7 @@ describe("Parser", () => {
 		test('Newline before first line', () => {
 			expect(() => {
 				parser.parseInput(firstLineNewlineBefore);
-			}).toThrowError("Invalid input: First line should be a number between 1 and 1000");
+			}).not.toThrow();
 		});
-
-		
-
-	test('Parse just bitmap', () => {
-		expect(() => {
-			parser.parseInput(justBitmap);
-		}).toThrowError("Invalid input: invalid size format");
-	});
-
 	});
 })

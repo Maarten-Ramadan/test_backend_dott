@@ -2,9 +2,7 @@ import { ArgParser } from './ArgParser'
 import { Reader } from './Reader';
 import { Parser } from './Parser';
 import { TestCase } from './TestCase'
-import { ASolver } from './ASolver';
-import { SolverRecursive } from './SolverRecursive';
-import { SolverIterative } from './SolverIterative';
+import { Solver } from './Solver';
 import { Flags } from './Reader';
 import { Printer } from './Printer';
 import { exit } from 'process';
@@ -13,18 +11,18 @@ async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown a
 	var argParser = new ArgParser();
 	var reader = new Reader();
 	var parser = new Parser();
-	var solver: ASolver;
+	var solver = new Solver();
 	var printer = new Printer();
 
 	if (args)
 		argParser.ParseArgs(args);
 
-	// Set flags
-	var flags = 0;
-	if (argParser.isInput) // TODO echt nodig?
-		flags |= Flags.INPUT;
-	if (argParser.isOutput)  // TODO fixen
-		flags |= Flags.OUTPUT;
+	// // Set flags
+	// var flags = 0;
+	// if (argParser.isInput) // TODO echt nodig?
+	// 	flags |= Flags.INPUT;
+	// if (argParser.isOutput)  // TODO fixen
+	// 	flags |= Flags.OUTPUT;
 
 		
 	try {
@@ -38,11 +36,6 @@ async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown a
 			console.error(error);
 		exit(1); // gracefully exit function?
 	}
-
-	if (argParser.isRecursive)
-		solver = new SolverRecursive() // TODO try/catch?
-	else
-		solver = new SolverIterative() // TODO try/catch?
 
 	testCases = solver.solve(testCases!); // TODO try/catch?
 	
