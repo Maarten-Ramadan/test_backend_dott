@@ -33,7 +33,7 @@ export class ArgParser // TODO wat hiermee doen?
 				inputFile = true;
 			}
 			else
-				throw new Error('Unrecognised argument'); // TODO options?
+				throw new Error('Unrecognised argument'); // TODO --help
 		}
 		if (this.isIterative && this.isRecursive)
 			throw new Error('Choose either recursive (-r) or iterative (-i)');

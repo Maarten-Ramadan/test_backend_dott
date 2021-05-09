@@ -3,19 +3,35 @@ import { Reader } from './Reader';
 import { Parser } from './Parser';
 import { TestCase } from './TestCase'
 import { Solver } from './Solver';
-import { Flags } from './Reader';
+// import { Flags } from './Reader';
 import { Printer } from './Printer';
 import { exit } from 'process';
+import { Command } from 'commander';
 
 async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown all trycatches
-	var argParser = new ArgParser();
-	var reader = new Reader();
-	var parser = new Parser();
-	var solver = new Solver();
-	var printer = new Printer();
+	const argParser = new ArgParser();// TODO remove
+	const reader = new Reader();
+	const parser = new Parser();
+	const solver = new Solver();
+	const printer = new Printer();
+	const argsParser = new Command();
 
-	if (args)
-		argParser.ParseArgs(args);
+
+	argsParser
+		.option('-d, --debug', 'output extra debugging')
+		.option('-s, --small', 'small pizza size')
+		.option('-p, --pizza-type <type>', 'flavour of pizza');
+
+	argsParser.parse(args);
+
+	const options = argsParser.opts();
+	if (options.debug)
+		console.log(options);
+	console.log('pizza details:');
+	if (options.small)
+		console.log('- small pizza size');
+	if (options.pizzaType)
+		console.log(`- ${options.pizzaType}`);
 
 	// // Set flags
 	// var flags = 0;
@@ -26,7 +42,7 @@ async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown a
 
 		
 	try {
-		var input: string = await reader.read(argParser.inputFilePath);
+		const input: string = await reader.read(argParser.inputFilePath);
 		var testCases: TestCase[] = parser.parseInput(input);
 	}
 	catch (error) {
@@ -37,13 +53,12 @@ async function MainProcess(args?: string[]): Promise<void> { // TODO trackdown a
 		exit(1); // gracefully exit function?
 	}
 
-	testCases = solver.solve(testCases!); // TODO try/catch?
-	
+	solver.solve(testCases);
 	printer.print(testCases);
 }
 
 try {
-	MainProcess(process.argv.slice(2));
+	MainProcess(process.argv);
 }
 catch (error) {
 	console.error(error);

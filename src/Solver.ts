@@ -2,7 +2,7 @@ import { TestCase } from './TestCase'
 
 export class Solver
 {
-	private findLowestNeigbour(testCase: TestCase, x: number, y: number): number { // TODO kan dit beter?
+	private findLowestNeighbour(testCase: TestCase, y: number, x: number): number {
 		var lowest: number = Infinity;
 
 		let up = y - 1;
@@ -10,19 +10,20 @@ export class Solver
 		let left = x - 1;
 		let right = x + 1;
 		
-		if (up >= 0 && testCase.resultMap[up][x] != NaN && testCase.resultMap[up][x] < lowest)
+		// Check all neighbours and return the lowest one
+		if (up >= 0 && testCase.resultMap[up][x] < lowest)
 			lowest = testCase.resultMap[up][x];
-		if (down < testCase.rows && testCase.resultMap[down][x] != NaN && testCase.resultMap[down][x] < lowest)
+		if (down < testCase.rows && testCase.resultMap[down][x] < lowest)
 			lowest = testCase.resultMap[down][x];
-		if (left >= 0 && testCase.resultMap[y][left] != NaN && testCase.resultMap[y][left] < lowest)
+		if (left >= 0 && testCase.resultMap[y][left] < lowest)
 			lowest = testCase.resultMap[y][left];
-		if (right < testCase.columns && testCase.resultMap[y][right] != NaN && testCase.resultMap[y][right] < lowest)
+		if (right < testCase.columns && testCase.resultMap[y][right] < lowest)
 			lowest = testCase.resultMap[y][right];
 
 		return lowest;
 	} // findLowestNeighbour()
 
-	private solveIt(testCase: TestCase, x: number, y: number): void {
+	private fillInResult(testCase: TestCase, y: number, x: number): void {
 		var changed: boolean = true;
 
 		while (true) {
@@ -40,7 +41,7 @@ export class Solver
 						continue ;
 					
 					// Else find lowest neighbour
-					let lowest = this.findLowestNeigbour(testCase, x, y);
+					let lowest = this.findLowestNeighbour(testCase, y, x);
 
 					// Update positions distance if lowest neighbour has been found
 					if (lowest != Infinity) {
@@ -54,7 +55,7 @@ export class Solver
 				}
 			}
 		}
-	} // solveIt
+	} // fillInResult
 
 	private makeResultArray(testCase: TestCase) {
 		// Initialize result array
@@ -70,13 +71,13 @@ export class Solver
 			}
 			testCase.resultMap.push(row);
 		}
-	}
+	} // makeResultArray
 
 	public solve(testCases: TestCase[]): TestCase[] {
 		for (const testCase of testCases) {
 			this.makeResultArray(testCase);
-			this.solveIt(testCase, 0, 0);
+			this.fillInResult(testCase, 0, 0);
 		}
 		return testCases;
-	} // solve()
-} // ASolver
+	} // solve
+} // Solver
