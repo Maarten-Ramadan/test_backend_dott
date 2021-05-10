@@ -5,6 +5,7 @@ describe("Solver", () => {
 	var solver = new Solver();
 
 	describe("ResultMap", () => {
+
 		test("Only zero's", () => {
 			var testCase = new TestCase();
 			testCase.columns = 5;
@@ -26,6 +27,7 @@ describe("Solver", () => {
 			var output = solver.solve(input);
 			expect(output).toEqual(expected);
 		});
+
 		test("All 1's", () => {
 			var testCase = new TestCase();
 			testCase.columns = 5;
@@ -48,6 +50,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 0 top left", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -70,6 +73,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 1 top left", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -92,6 +96,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 1 bottom right", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -114,6 +119,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 1 top right", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -136,6 +142,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 1 bottom left", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -158,6 +165,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("One 1 in the middle", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -180,6 +188,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("A 1 in all corners", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -202,6 +211,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("Assignment example test case", () => {
 			var testCase = new TestCase();
 			testCase.rows = 3;
@@ -224,6 +234,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("Cross of ones", () => {
 			var testCase = new TestCase();
 			testCase.rows = 5;
@@ -250,6 +261,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("Something random", () => {
 			var testCase = new TestCase();
 			testCase.rows = 5;
@@ -276,6 +288,7 @@ describe("Solver", () => {
 			output = solver.solve(output);
 			expect(output).toEqual(expected);
 		});
+
 		test("Multiple test cases", () => {
 			var testCase1 = new TestCase();
 			testCase1.rows = 5;

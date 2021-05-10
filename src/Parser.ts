@@ -10,12 +10,12 @@ export class Parser
 
 		// Delete all leading newlines
 		input = input.substr(input.indexOf(input.match(/[^\n]/)!.toString()));
-		
+
 		// Check format of First Line
-		let firstLine = input.match(/^[ ]*[0-9]{1,4}[ ]*[\n]/)?.toString();
+		const firstLine = input.match(/^[ ]*[0-9]{1,4}[ ]*[\n]/)?.toString();
 
 		// Check if number of TestCases is valid
-		var testCount = firstLine ? +firstLine : -1;
+		const testCount = firstLine ? +firstLine : -1;
 		if (testCount < 1 || testCount > 1000)
 			throw new Error("Invalid input: First line should be a number between 1 and 1000");
 
@@ -23,7 +23,7 @@ export class Parser
 		input = input.substr(input.indexOf('\n')+1);
 
 		// Check for illegal characters (only numbers, newlines and spaces)
-		var found = input.match(/[^0-9\n ]/g);
+		const found = input.match(/[^0-9\s]/g);
 		if (found)
 			throw new Error(`Invalid input: Illegal characters in input: "${found}"`);
 
@@ -35,7 +35,7 @@ export class Parser
 			if (i > testCount)
 			throw new Error(`Invalid input: illegal row after bitmap ${testCount}`);
 			
-			var testCase = new TestCase();
+			let testCase = new TestCase();
 
 			// Check size format (1-3 numbers + 1 space + 1-3 numbers)
 			let dimensions: any = lines.shift()?.trim();
@@ -61,7 +61,7 @@ export class Parser
 					throw new Error("Invalid input: number of rows doesn't match input");
 
 				// Check for valid line length and invalid numbers
-				var regex = new RegExp("^[0-1]{" + testCase.columns + "}$");
+				const regex = new RegExp("^[0-1]{" + testCase.columns + "}$");
 				if (!lines[0].trim().match(regex))
 					throw new Error(`Bitmap number ${testCases.length + 1} is invalid`);
 				
@@ -76,7 +76,7 @@ export class Parser
 		}
 		// See if the number of TestCases matches the input
 		if (testCases.length !== testCount)
-			throw new Error("Invalid input: Illegal newlines or the number of test cases doesn't match input");
+			throw new Error("Invalid input: the number of test cases doesn't match input");
 
 		return testCases;
 	} // parseInput
