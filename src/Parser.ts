@@ -11,8 +11,8 @@ export class Parser
 		// Delete all leading newlines
 		input = input.substr(input.indexOf(input.match(/[^\n]/)!.toString()));
 
-		// Check format of First Line
-		const firstLine = input.match(/^[ ]*[0-9]{1,4}[ ]*[\n]/)?.toString();
+		// Check format of First Line (*WS + 1-4 numbers + *WS + newline)
+		const firstLine = input.match(/^[\s]*[0-9]{1,4}[\s]*[\n]/)?.toString();
 
 		// Check if number of TestCases is valid
 		const testCount = firstLine ? +firstLine : -1;
@@ -37,15 +37,15 @@ export class Parser
 			
 			let testCase = new TestCase();
 
-			// Check size format (1-3 numbers + 1 space + 1-3 numbers)
-			let dimensions: any = lines.shift()?.trim();
-			if (!dimensions.match(/^[0-9]{1,3} +[0-9]{1,3}$/))
+			// Check size format (*WS + 1-3 numbers + *WS + 1-3 numbers + *WS)
+			let dimensions: any = lines.shift()!.trim();
+			if (!dimensions.match(/^[0-9]{1,3}[\s]*[0-9]{1,3}$/))
 				throw new Error("Invalid input: invalid size format");
 
 			// Assign columns and rows
-			dimensions = dimensions.split(' ').filter((el: string) => el != '');
+			dimensions = dimensions.split(/\s/).filter((el: string) => el != '');
 			if (dimensions.length != 2)
-				throw new Error("Invalid input: missing column size");
+				throw new Error("Invalid input: invalid size format");
 			[testCase.rows, testCase.columns] = [...dimensions];
 			
 			// Check if row and column sizes are valid

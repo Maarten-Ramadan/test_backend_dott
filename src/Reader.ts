@@ -17,20 +17,20 @@ export class Reader
 				bitmap = chunk.toString();
 			})
 			while (bitmap === '') { await this.delay(100); }
-		}
-		if (bitmap === 'help\n') {
-			console.log('Usage:' 										+ '\n' +
-						' > App [options]'								+ '\n' +
-						' > cat <path> | App' 							+ '\n' +
-																		  '\n' +
-						'Options:'										+ '\n' +
-						' -f, --file <path>  input from file' 			+ '\n' +
-						' -h, --help         display help for command'	+ '\n' +
-																		  '\n' +
-						'Example calls:'								+ '\n' +
-						' $ node App.js -f <path>'						+ '\n' +
-						' $ cat <path> | node App.js'					);
-			exit(0);
+			if (bitmap === 'help\n') {
+				console.log('Usage:' 										+ '\n' +
+							' > App [options]'								+ '\n' +
+							' > cat <path> | App' 							+ '\n' +
+																			  '\n' +
+							'Options:'										+ '\n' +
+							' -f, --file <path>  input from file' 			+ '\n' +
+							' -h, --help         display help for command'	+ '\n' +
+																			  '\n' +
+							'Example calls:'								+ '\n' +
+							' $ node App.js -f <path>'						+ '\n' +
+							' $ cat <path> | node App.js'					);
+				exit(0);
+			}
 		}
 		return bitmap;
 	}

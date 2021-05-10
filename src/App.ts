@@ -6,7 +6,7 @@ import { Printer } from './Printer';
 import { exit } from 'process';
 import { Command } from 'commander';
 
-const main = async (args?: string[]): Promise<void> => { // TODO trackdown all trycatches
+export const main = async (args?: string[]): Promise<void> => {
 	const argsParser = new Command();
 	const reader = new Reader();
 	const parser = new Parser();
@@ -33,7 +33,6 @@ const main = async (args?: string[]): Promise<void> => { // TODO trackdown all t
 		console.error(error);
 		exit(1);
 	}
-
 }
 
 main(process.argv);

@@ -108,6 +108,54 @@ describe("Parser", () => {
 			}).toThrowError("Invalid input: Illegal characters in input: \"f\"");
 		});
 
+		test('Row size of 0', () => {
+			const input = 	'1\n'		+
+							'0 4\n'		+
+							'0001\n'	+
+							'0011\n'	+
+							'0110'		;
+
+			expect(() => {
+				parser.parseInput(input);
+			}).toThrowError("Invalid input: sizes must be bigger than 0 and smaller than 183");
+		});
+
+		test('Row size of 183', () => {
+			const input = 	'1\n'		+
+							'183 4\n'	+
+							'0001\n'	+
+							'0011\n'	+
+							'0110'		;
+
+			expect(() => {
+				parser.parseInput(input);
+			}).toThrowError("Invalid input: sizes must be bigger than 0 and smaller than 183");
+		});
+
+		test('Column size of 0', () => {
+			const input = 	'1\n'		+
+							'3 0\n'		+
+							'0001\n'	+
+							'0011\n'	+
+							'0110'		;
+
+			expect(() => {
+				parser.parseInput(input);
+			}).toThrowError("Invalid input: sizes must be bigger than 0 and smaller than 183");
+		});
+
+		test('Column size of 183', () => {
+			const input = 	'1\n'		+
+							'3 183\n'		+
+							'0001\n'	+
+							'0011\n'	+
+							'0110'		;
+
+			expect(() => {
+				parser.parseInput(input);
+			}).toThrowError("Invalid input: sizes must be bigger than 0 and smaller than 183");
+		});
+
 		test('Illegal character for column size', () => {
 			const input =	'1\n'		+
 							'3 +\n'		+
@@ -135,6 +183,18 @@ describe("Parser", () => {
 		test('Spaces in size line', () => {
 			const input = 	'1\n'			+
 							' 3   4  \n'	+
+							'0001\n'		+
+							'0011\n'		+
+							'0110'			;
+
+			expect(() => {
+				parser.parseInput(input);
+			}).not.toThrow();
+		});
+
+		test('Whitespaces in size line', () => {
+			const input = 	'1\n'			+
+							' 	3 	4  	\n'	+
 							'0001\n'		+
 							'0011\n'		+
 							'0110'			;
@@ -505,7 +565,7 @@ describe("Parser", () => {
 							'\n'				+
 							'4\n'				+
 							'\n\t'				+
-							'\n'				+
+							'\n  \t\t   \t'		+
 							'\t3 4\n'			+
 							'\n'				+
 							'0001\n'			+
