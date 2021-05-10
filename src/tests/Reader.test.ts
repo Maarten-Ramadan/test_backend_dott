@@ -1,26 +1,7 @@
 import { Reader } from '../Reader'
 const fs = require("fs");
 
-// const dir = 'build/tests/tmp';
-const input1 = '1\n3 4\n0001\n0011\n0110';
-
-// const tmpDir = async () => {
-// 	if (!fs.existsSync(dir)){
-// 		fs.mkdirSync(dir);
-// 		fs.writeFile('./build/tests/tmp/tmpfile.txt', input1,  function(err: Error) {
-// 			if (err) {
-// 				return console.error(err);
-// 			}
-// 		});
-// 	}
-// 	return ;
-// }
-
-
-// function delay(ms: number) {
-// 	return new Promise(resolve => setTimeout(resolve, ms));
-// }
-
+const input1 = '1\n3 4\n0001\n0011\n0110\n';
 
 describe("Reader", () => {
 	var reader: Reader = new Reader();
@@ -54,7 +35,3 @@ describe("Reader", () => {
 	});
 })
 
-// fs.rmdirSync(dir, { recursive: true });
-
-
-// makeTMP(); // TODO fixen
