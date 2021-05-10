@@ -1,7 +1,6 @@
 import { Reader } from '../Reader'
-import { main } from '../App.js'
 
-const input = 	'1'		+ '\n' +
+var input = 	'1'		+ '\n' +
 				'3 4'	+ '\n' +
 				'0001'	+ '\n' +
 				'0011'	+ '\n' +
@@ -21,16 +20,16 @@ const usage =	'Usage:' 										+ '\n' +
 
 describe("Reader", () => {
 	const reader: Reader = new Reader();
-	
-	const consoleLog = console.log;
-	console.log = jest.fn();
 
 	test('Read valid input from stdin', () => {
-		async () => {
-			var bitmap = await reader.read('');
-			expect(bitmap).toEqual(input);
-		}
-		console.log(input);
+		const mockStdIn = require('mock-stdin').stdin();
+
+		(async () => {
+			expect(await reader.read('')).toEqual(input);
+		})();
+
+		mockStdIn.send(input);
+		mockStdIn.end();
 	});
 	
 	test('Read filethatdoesntexist', async () => {
@@ -43,19 +42,10 @@ describe("Reader", () => {
 	});
 
 	test('Read valid input from tmpfile', async () => {
-		let bitmap: string;
-		bitmap = await reader.read('./tests/tmp/tmpfile.txt');
-		expect(bitmap).toEqual(input)
+		expect(await reader.read('./tests/tmp/tmpfile.txt')).toEqual(input);
 	});
 
-	test('Help', () => {
-			console.log('here');
-			let bitmap = '';
-		async () => {
-			bitmap = await reader.read('');
-			expect(bitmap).toEqual(usage);
-		}
-		console.log('help\n');
-	})
-})
-
+	test('Read invalid input from invalidfile', async () => {
+		expect(await reader.read('./tests/tmp/invalidfile.txt')).toEqual('invalid file\n');
+	});
+});

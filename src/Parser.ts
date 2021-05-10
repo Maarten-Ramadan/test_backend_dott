@@ -33,7 +33,7 @@ export class Parser
 		// Check format of all lines, split them into seperate TestCases and delete them from the array
 		for (let i = 1; lines.length; ++i) {
 			if (i > testCount)
-			throw new Error(`Invalid input: illegal row after bitmap ${testCount}`);
+				throw new Error(`Invalid input: illegal row after bitmap ${testCount}`);
 			
 			let testCase = new TestCase();
 
