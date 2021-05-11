@@ -28,12 +28,13 @@ Input:
 0110
 
 Output:
+
 3 2 1 0
 2 1 0 0
 1 0 0 1
 
 To set up environment run:	$ bash init.sh
-To run Jest tests run:		$ npx jest --coverage
+To run Jest tests run (from root folder):		$ npm t		- or: $ npx jest --coverage
 
 Usage:
 	> App [options]

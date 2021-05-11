@@ -30,10 +30,10 @@ describe("Reader", () => {
 	});
 
 	test('Read valid input from tmpfile', async () => {
-		expect(await reader.read('./tests/tmp/tmpfile.txt')).toEqual(input);
+		expect(await reader.read('./build/tests/tmp/validfile.txt')).toEqual(input);
 	});
 
 	test('Read invalid input from invalidfile', async () => {
-		expect(await reader.read('./tests/tmp/invalidfile.txt')).toEqual('invalid file\n');
+		expect(await reader.read('./build/tests/tmp/invalidfile.txt')).toEqual('invalid file\n');
 	});
 });
