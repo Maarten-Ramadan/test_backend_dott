@@ -7,7 +7,7 @@ var input = 	'1'		+ '\n' +
 				'0110'	+ '\n' ;
 
 describe("Reader", () => {
-	const reader: Reader = new Reader();
+	const reader = new Reader();
 
 	test('Read valid input from stdin', () => {
 		const mockStdIn = require('mock-stdin').stdin();
@@ -29,11 +29,11 @@ describe("Reader", () => {
 		}
 	});
 
-	test('Read valid input from tmpfile', async () => {
+	test('Read valid input from validfile.txt', async () => {
 		expect(await reader.read('./build/tests/tmp/validfile.txt')).toEqual(input);
 	});
 
-	test('Read invalid input from invalidfile', async () => {
+	test('Read invalid input from invalidfile.txt', async () => {
 		expect(await reader.read('./build/tests/tmp/invalidfile.txt')).toEqual('invalid file\n');
 	});
 });
