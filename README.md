@@ -4,9 +4,9 @@ Challange:\
 There is given a rectangular bitmap of size n*m. Each pixel of the bitmap is either white or black, but at least one is white. The pixel in i-th line and j-th column is called the pixel (i,j). The distance between two pixels p1=(i1,j1) and p2=(i2,j2) is defined as d(p1,p2)=|i1-i2|+|j1-j2|.\
 \
 This program:\
-\	● reads the description of the bitmap from the standard input;\
-\	● for each pixel, computes the distance to the nearest white;\
-\	● writes the results to the standard output.\
+	● reads the description of the bitmap from the standard input;\
+	● for each pixel, computes the distance to the nearest white;\
+	● writes the results to the standard output.\
 \
 Input:\
 The number of test cases t (1≤t≤1000) is in the first line of input, then t test cases follow.
@@ -33,25 +33,25 @@ Output:\
 1 0 0 1\
 \
 Requirements:\
-\	- node.js \	\	\	\	$ brew install node\
-\	- yarn \	\	\	\	\	$ npm install --global yarn\
-\	- TypeScript \	\	\	$ npm install typescript --save-dev\
+	- node.js 				$ brew install node\
+	- yarn 					$ npm install --global yarn\
+	- TypeScript 			$ npm install typescript --save-dev\
 \
-To set up and compile run:\	$ yarn install\
-To run tests run:\	\	\	$ yarn test\
+To set up and compile run:	$ yarn install\
+To run tests run:			$ yarn test\
 \
 Usage:\
-\	> App [options]\
-\	> cat <path> | App\
+	> App [options]\
+	> cat <path> | App\
 \
 Options:\
-\	-f, --file <path>\	input from file\
-\	-h, --help\	\	\	display help for command\
+	-f, --file <path>	input from file\
+	-h, --help			display help for command\
 \
 Example calls:\
-\	$ node App.js -f <path>\
-\	$ cat <path> | node App.js\
+	$ node App.js -f <path>\
+	$ cat <path> | node App.js\
 \
 \
 To see the program in action run the following command from the root folder:\
-\	$ cat ./src/tests/testFiles/bitmap.map | node ./dist/App.js
+	$ cat ./src/tests/testFiles/bitmap.map | node ./dist/App.js
