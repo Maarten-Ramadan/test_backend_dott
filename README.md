@@ -33,6 +33,10 @@ Output:
 2 1 0 0
 1 0 0 1
 
+Requirements: 
+	- node.js 				$ brew install node
+	- yarn 					$ npm install --global yarn
+	- TypeScript 			$ npm install typescript --save-dev
 
 To set up and compile run:	$ yarn install
 To run tests run:			$ yarn test
@@ -51,4 +55,4 @@ Example calls:
 
 
 To see the program in action run the following command from the root folder:
-	$ cat ./src/tests/testFiles/bitmap.txt | node ./dist/App.js
+	$ cat ./src/tests/testFiles/bitmap.map | node ./dist/App.js
