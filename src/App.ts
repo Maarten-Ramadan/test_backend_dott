@@ -6,7 +6,7 @@ import { Printer } from './Printer';
 import { exit } from 'process';
 import { Command } from 'commander';
 
-export const main = async (args?: string[]): Promise<void> => {
+const main = async (args?: string[]): Promise<void> => {
 	const argsParser = new Command();
 	const reader = new Reader();
 	const parser = new Parser();

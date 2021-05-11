@@ -7,15 +7,20 @@ export class Reader
 	}
 
 	public async read(inputFilePath: string): Promise<string> {
-		var bitmap: string = '';
+		var input: string = '';
+
+		// Read from file if path was passed
 		if (inputFilePath)
-			bitmap = await fs.readFileSync(inputFilePath, 'utf-8',);
+			input = await fs.readFileSync(inputFilePath, 'utf-8',);
 		else {
+			// Else read from standard input
 			process.stdin.on('data', (chunk: Buffer) => {
-				bitmap = chunk.toString();
+				input = chunk.toString();
 			})
-			while (bitmap === '') { await this.delay(100); }
+
+			// Wait until input has been received
+			while (input === '') { await this.delay(100); }
 		}
-		return bitmap;
+		return input;
 	}
 }

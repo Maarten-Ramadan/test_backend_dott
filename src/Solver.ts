@@ -39,16 +39,20 @@ export class Solver
 					// 0's are never changed so continue ;
 					if (testCase.resultMap[y][x] == 0)
 						continue ;
-					
+
 					// Else find lowest neighbour
 					let lowest = this.findLowestNeighbour(testCase, y, x);
 
-					// Update positions distance if lowest neighbour has been found
+					// Update distance if a lowest neighbour was found
 					if (lowest != Infinity) {
-						let newDistance = 1 + lowest;
+						// Distance is lowest neigbour + 1
+						let newDistance = lowest + 1;
+						
+						// Update distance only if newDistance is different from current distance
 						if (newDistance != testCase.resultMap[y][x]) {
 							// Mark that a change has been made and another iteration is necessary
 							changed = true;
+							// Update distance
 							testCase.resultMap[y][x] = newDistance;
 						}
 					}
@@ -65,8 +69,7 @@ export class Solver
 				// Set the distance to 0 if the position is a whitepixel
 				if (testCase.bitmap[y][x] == '1')
 					row[x] = 0;
-				// else NaN -> needs to be solved
-				else
+				else // else NaN -> needs to be solved
 					row[x] = NaN;
 			}
 			testCase.resultMap.push(row);

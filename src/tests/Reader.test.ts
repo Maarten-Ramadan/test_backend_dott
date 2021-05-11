@@ -1,10 +1,11 @@
 import { Reader } from '../Reader'
 
-var input = 	'1'		+ '\n' +
-				'3 4'	+ '\n' +
-				'0001'	+ '\n' +
-				'0011'	+ '\n' +
-				'0110'	;
+var input = 
+	'1'		+ '\n' +
+	'3 4'	+ '\n' +
+	'0001'	+ '\n' +
+	'0011'	+ '\n' +
+	'0110'	;
 
 describe("Reader", () => {
 	const reader = new Reader();
