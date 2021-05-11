@@ -33,25 +33,25 @@ Output:\
 1 0 0 1\
 \
 Requirements:\
-\	- node.js -  				$ brew install node\
-\	- yarn -  					$ npm install --global yarn\
-\	- TypeScript -  			$ npm install typescript --save-dev\
+	- node.js -  				$ brew install node\
+	- yarn -  					$ npm install --global yarn\
+	- TypeScript -  			$ npm install typescript --save-dev\
 \
 To set up and compile run:	$ yarn install\
 To run tests run:			$ yarn test\
 \
 Usage:\
-\	> App [options]\
-\	> cat <path> | App\
+	> App [options]\
+	> cat <path> | App\
 \
 Options:\
-\	-f, --file <path>	input from file\
-\	-h, --help			display help for command\
+	-f, --file <path>	input from file\
+	-h, --help			display help for command\
 \
 Example calls:\
-\	$ node App.js -f <path>\
-\	$ cat <path> | node App.js\
+	$ node App.js -f <path>\
+	$ cat <path> | node App.js\
 \
 \
 To see the program in action run the following command from the root folder:\
-\	$ cat ./src/tests/testFiles/bitmap.map | node ./dist/App.js
+	$ cat ./src/tests/testFiles/bitmap.map | node ./dist/App.js
