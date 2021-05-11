@@ -45,11 +45,11 @@ Usage:\
 	> cat <path> | App\
 \
 Options:\
-	-f, --file <path>	input from file\
+	-f, --file \<path>	input from file\
 	-h, --help			display help for command\
 \
 Example calls:\
-	$ node App.js -f <path>\
+	$ node App.js -f \<path>\
 	$ cat <path> | node App.js\
 \
 \
