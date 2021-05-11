@@ -33,8 +33,8 @@ Output:\
 1 0 0 1\
 \
 Requirements:\
-	- node.js -  				$ brew install node\
-	- yarn -  					$ npm install --global yarn\
+	- Node.js -  				$ brew install node\
+	- Yarn -  					$ npm install --global yarn\
 	- TypeScript -  			$ npm install typescript --save-dev\
 \
 To set up and compile run:	$ yarn install\
@@ -42,7 +42,7 @@ To run tests run:			$ yarn test\
 \
 Usage:\
 	> App [options]\
-	> cat <path> | App\
+	> cat \<path> | App\
 \
 Options:\
 	-f, --file \<path>	input from file\
