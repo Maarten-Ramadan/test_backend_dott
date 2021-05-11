@@ -1,0 +1,6 @@
+{
+  "name": "@dott/src",
+  "version": "1.0.0",
+  "main": "dist/App.js",
+  "license": "MIT"
+}

@@ -4,7 +4,7 @@ var input = 	'1'		+ '\n' +
 				'3 4'	+ '\n' +
 				'0001'	+ '\n' +
 				'0011'	+ '\n' +
-				'0110'	+ '\n' ;
+				'0110'	;
 
 describe("Reader", () => {
 	const reader = new Reader();
@@ -29,11 +29,11 @@ describe("Reader", () => {
 		}
 	});
 
-	test('Read valid input from validfile.txt', async () => {
-		expect(await reader.read('./build/tests/tmp/validfile.txt')).toEqual(input);
+	test('Read valid input from validInput.txt', async () => {
+		expect(await reader.read('./src/tests/testFiles/validInput.map')).toEqual(input);
 	});
 
-	test('Read invalid input from invalidfile.txt', async () => {
-		expect(await reader.read('./build/tests/tmp/invalidfile.txt')).toEqual('invalid file\n');
+	test('Read invalid input from invalidInput.txt', async () => {
+		expect(await reader.read('./src/tests/testFiles/invalidInput.map')).toEqual('invalid input\n');
 	});
 });

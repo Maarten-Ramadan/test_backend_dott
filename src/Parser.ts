@@ -1,13 +1,12 @@
 import { TestCase } from './TestCase'
-
 export class Parser
 {
 	public parseInput(input: string): TestCase[] {
 		var testCases: TestCase[] = [];
-
+		
 		if (!input)
 			throw new Error("Invalid input: Empty file");
-
+		
 		// Delete all leading newlines
 		input = input.substr(input.indexOf(input.match(/[^\n]/)!.toString()));
 
@@ -18,7 +17,7 @@ export class Parser
 		const testCount = firstLine ? +firstLine : -1;
 		if (testCount < 1 || testCount > 1000)
 			throw new Error("Invalid input: First line should be a number between 1 and 1000");
-
+		
 		// Remove the first line to leave only the testcases
 		input = input.substr(input.indexOf('\n')+1);
 
@@ -29,7 +28,7 @@ export class Parser
 
 		// Split input into seperate lines, filter all newlines and trim all whitespaces
 		let lines: string[] = input.split('\n').filter((el) => el.trim() !== '');
-
+		
 		// Check format of all lines, split them into seperate TestCases and delete them from the array
 		for (let i = 1; lines.length; ++i) {
 			if (i > testCount)
@@ -77,7 +76,6 @@ export class Parser
 		// See if the number of TestCases matches the input
 		if (testCases.length !== testCount)
 			throw new Error("Invalid input: the number of test cases doesn't match input");
-
 		return testCases;
 	} // parseInput
 } // Parser

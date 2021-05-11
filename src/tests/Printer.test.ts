@@ -32,7 +32,7 @@ describe("Printer", () => {
 		];
 
 		printer.print(input);
-		expect(console.log.mock.calls).toEqual(expected);
+		expect((console.log as jest.Mock).mock.calls).toEqual(expected);
 		console.log = log;
 	});
 
@@ -155,7 +155,7 @@ describe("Printer", () => {
 		];
 
 		printer.print(input);
-		expect(console.log.mock.calls).toEqual(expected);
+		expect((console.log as jest.Mock).mock.calls).toEqual(expected);
 		console.log = log;
 	});
 });

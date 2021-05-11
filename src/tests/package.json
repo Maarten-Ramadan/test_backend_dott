@@ -1,0 +1,9 @@
+{
+  "name": "@dott/tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+	  "@dott/src": "1.0.0"
+  }
+}
