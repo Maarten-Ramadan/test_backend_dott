@@ -35,7 +35,6 @@ Output:\
 Requirements:\
 	- Node.js -  				$ brew install node\
 	- Yarn -  					$ npm install --global yarn\
-	- TypeScript -  			$ npm install typescript --save-dev\
 \
 To set up and compile run:	$ yarn install\
 To run tests run:			$ yarn test\
