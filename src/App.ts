@@ -20,13 +20,18 @@ const main = async (args?: string[]): Promise<void> => {
 		.addHelpText('after', '\nExample calls:\n  $ node App.js -f <path>')
 		.addHelpText('after', '  $ cat <path> | node App.js');
 
+	// Parse arguments
 	argsParser.parse(args);
 	const options = argsParser.opts();
 
 	try {
+		// Read
 		const input: string = await reader.read(options.file);
+		// Parse
 		var testCases: TestCase[] = parser.parseInput(input);
+		// Solve
 		solver.solve(testCases);
+		// Print
 		printer.print(testCases);
 	}
 	catch (error) {
